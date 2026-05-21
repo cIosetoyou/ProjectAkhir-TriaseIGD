@@ -31,7 +31,7 @@ void insertAntrean(string nama, int kat){
 void bacaFile(){
     FILE *berkas;
     berkas=fopen("data_pasien.txt","r");
-    if(berkas!=NULL)1{
+    if(berkas!=NULL){
         char buf_name[100]; string nama; int kat;
         while(fscanf(berkas, " %[^,],%d\n", buf_name, &kat) != EOF){
             nama = buf_name;
