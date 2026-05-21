@@ -8,7 +8,7 @@ struct Pasien{
     Pasien* next;
 };
 Pasien* head = NULL;
-
+int totalPasien = 0;
 
 void insertAntrean(string nama, int kat){
     Pasien* baru = new Pasien;
@@ -26,7 +26,7 @@ void insertAntrean(string nama, int kat){
         baru->next = temp->next;
         temp->next = baru;
     }
-    
+    totalPasien++;
 }
 void bacaFile(){
     FILE *berkas;
@@ -113,6 +113,39 @@ void panggilPasien() {
     cin.get();
 }
 
+void lihatAntrean() {
+	if (head == NULL){
+		cout << "Tidak ada antrean!\n";
+		cout << "Tekan enter untuk kembali...";
+		cin.get();
+		return;
+		}
+		
+		Pasien* temp = head;
+		int no = 1;
+			
+		cout << "\n==================== DATA SELURUH ANTREAN IGD ====================\n";
+		cout << left << setw(5) << "NO" << setw(20) << "NAMA PASIEN" << setw(20) << "PRIORITAS" << setw(20) << "STATUS" << endl;
+		cout << "---------------------------------------------------------------------\n";
+		
+		while (temp != NULL){
+			
+			string prioritas, status, zona, kategoriFull, tindakan;
+			getKategoriInfo(temp->kategori, prioritas, status, zona, kategoriFull, tindakan);
+			
+			cout << left << setw(5) << no << setw(20) << temp->nama << setw(20) << prioritas << setw(20) << status << endl;
+			
+			temp = temp->next;
+			no++;
+		}
+			
+        cout << "=========================================================================\n";
+        cout << "Total Data : " << totalPasien << endl;
+        
+        cout << "\nTekan Enter Untuk Kembali...";
+        cin.get();
+	}
+
 int main(){
 	bacaFile();
 	int n;
@@ -124,7 +157,7 @@ int main(){
 		switch(n){
 			case 1: registrasiPasien(); break;  
 			case 2: panggilPasien(); break;
-			case 3: 
+			case 3: lihatAntrean(); break;
 			case 4:  
 		}
 	} while (n!=5);
