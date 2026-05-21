@@ -131,7 +131,7 @@ void lihatAntrean() {
 		while (temp != NULL){
 			
 			string prioritas, status, zona, kategoriFull, tindakan;
-			getKategoriInfo(temp->kategori, prioritas, status, zona, kategoriFull, tindakan);
+			kategoriInfo(temp->kategori, prioritas, status, zona, kategoriFull, tindakan);
 			
 			cout << left << setw(5) << no << setw(20) << temp->nama << setw(20) << prioritas << setw(20) << status << endl;
 			
@@ -146,6 +146,44 @@ void lihatAntrean() {
         cin.get();
 	}
 
+void cariPasien() {
+    if (head == NULL) {
+        cout << "\n[SISTEM]: Antrean saat ini kosong!\n";
+        cout << "Tekan ENTER untuk kembali...";
+        cin.get();
+        return;
+    }
+    string nama;
+    cout << "\n==========================================\n";
+    cout << "          PENCARIAN DATA PASIEN\n";
+    cout << "==========================================\n";
+    cout << "Masukkan Nama Pasien yang dicari: ";
+    getline(cin, nama);
+
+    Pasien* temp = head;
+    bool ketemu = false;
+
+    while (temp != NULL) {
+        if (temp->nama == nama) {
+            string p, s, z, kf, t;
+            kategoriInfo(temp->kategori, p, s, z, kf, t);
+            
+            cout << "\nDATA DITEMUKAN:\n";
+            cout << "------------------------------------------\n";
+            cout << "Nama Pasien  : " << temp->nama << "\n";
+            cout << "Prioritas    : " << kf << "\n";
+            cout << "Status       : Menunggu di Zona " << z << "\n";
+            cout << "------------------------------------------\n";
+            ketemu = true;
+            break;
+        }
+        temp = temp->next;
+    }
+    if (!ketemu) cout << "\n[SISTEM]: Data Pasien dengan nama'" << nama << "' tidak ditemukan dalam antrean.\n";
+    cout << "\nTekan ENTER untuk kembali...";
+    cin.get();
+}
+
 int main(){
 	bacaFile();
 	int n;
@@ -158,7 +196,11 @@ int main(){
 			case 1: registrasiPasien(); break;  
 			case 2: panggilPasien(); break;
 			case 3: lihatAntrean(); break;
-			case 4:  
+			case 4: cariPasien(); break;
+            case 5: 
+            cout << "\nTerima kasih, semoga petugas sehat selalu"; break;
+            default:
+            cout << "Pilihan tidak valid! Pilih menu [1-4]\n"<< endl;
 		}
 	} while (n!=5);
 }
