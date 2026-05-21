@@ -83,6 +83,36 @@ void registrasiPasien(){
     cout << "Tekan ENTER untuk kembali ke menu...";
     cin.get();
 }
+void panggilPasien() {
+    if (head == NULL) {
+        cout << "\n[SISTEM]: Tidak ada pasien dalam antrean.\n";
+        cout << "Tekan ENTER untuk kembali...";
+        cin.get();
+        return;
+    }
+
+    Pasien* panggil = head;
+    head = head->next; 
+
+    string p, s, z, kf, t;
+    kategoriInfo(panggil->kategori, p, s, z, kf, t);
+
+    cout << "\n>> TINDAKAN MEDIS SEGERA\n";
+    cout << "-----------------------------------------------------\n";
+    cout << "SEDANG DIPROSES:\n";
+    cout << "Nama Pasien : " << panggil->nama << "\n";
+    cout << "Kategori    : " << kf << "\n";
+    cout << "Status      : " << t << "\n";
+    cout << "-----------------------------------------------------\n";
+    delete panggil;
+    totalPasien--;
+    tulisUlangFile(); 
+
+    cout << "\n[SISTEM]: Pasien telah dipindahkan dari antrean. Database diperbarui.\n";
+    cout << "Tekan ENTER untuk kembali ke menu...";
+    cin.get();
+}
+
 int main(){
 	bacaFile();
 	int n;
@@ -93,7 +123,7 @@ int main(){
 		cin.ignore();
 		switch(n){
 			case 1: registrasiPasien(); break;  
-			case 2:  
+			case 2: panggilPasien(); break;
 			case 3: 
 			case 4:  
 		}
