@@ -190,6 +190,14 @@ int main(){
 	    cout<<"=====================================================\n          SISTEM MANAJEMEN TRIASE IGD v1.0          \n=====================================================\n\n";
 		cout<<"-----------------------------------------------------\nMENU UTAMA:\n1. Registrasi Pasien Baru\n2. Panggil Pasien (Proses Penanganan)\n3. Lihat Detail Antrean\n4. Cari Data Pasien\n5. Keluar Program\n-----------------------------------------------------\nPilih menu [1-5]: ";
 		cin>>n;
+        // validasi input bukan angka
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(1000, '\n');
+
+			cout << "Input tidak valid! Masukkan angka.\n";
+			continue;
+		}
 		cin.ignore();
 		switch(n){
 			case 1: registrasiPasien(); break;  
