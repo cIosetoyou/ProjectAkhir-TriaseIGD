@@ -67,10 +67,23 @@ void registrasiPasien(){
     cout << "\n>> REGISTRASI PASIEN\n";
     cout << "Nama Pasien\t: ";
     getline(cin, nama);
+    do{
     cout << "Kategori Triase\t:\n";
     cout << "\t[1] P1 - MERAH (Resusitasi)\n\t[2] P2 - MERAH (Emergency)\n\t[3] P3 - KUNING (Urgent)\n\t[4] P4 - HIJAU (Non-Urgent)\n\t[5] P5 - BIRU (False Emergency)\n";
     cout << "Pilihan Kategori : ";
     cin >> kat;
+    if (cin.fail()) {
+			cin.clear();
+			cin.ignore(1000, '\n');
+
+			cout << "Input tidak valid! Masukkan angka.\n";
+            continue;
+		}
+    if (kat < 1 || kat > 5) {
+        cout << "Input Tidak Valid\n";
+    }
+    }while (kat < 1 || kat > 5);
+
     cin.ignore(1000, '\n');
 
     insertAntrean(nama, kat);
